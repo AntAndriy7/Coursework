@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs2ojffxs77m1"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_s75dy"]
+[ext_resource type="Texture2D" uid="uid://b8jraxto3bxfc" path="res://assets/circle.png" id="1_wrqgo"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_s75dy")
+
+[node name="ProgressStamina" type="TextureProgressBar" parent="."]
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 1104.0
+offset_bottom = 1104.0
+scale = Vector2(0.15, 0.15)
+value = 70.0
+fill_mode = 5
+texture_under = ExtResource("1_wrqgo")
+texture_progress = ExtResource("1_wrqgo")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0.619608, 0, 1)

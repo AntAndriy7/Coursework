@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://cn3mckfmfxcsj"]
+
+[ext_resource type="PackedScene" uid="uid://c3cyoivmqfde1" path="res://prefabs/player.tscn" id="1_csxcm"]
+[ext_resource type="PackedScene" uid="uid://b85vutwuts2mn" path="res://prefabs/world env/we_dangeon.tscn" id="1_nc88y"]
+[ext_resource type="MeshLibrary" uid="uid://c18ppwukkgswb" path="res://prefabs/tileset_prison/prison_tileset.tres" id="4_bwyyl"]
+[ext_resource type="PackedScene" uid="uid://cs2ojffxs77m1" path="res://prefabs/hud.tscn" id="4_ehx4a"]
+[ext_resource type="PackedScene" uid="uid://b14kscqpw8d0h" path="res://prefabs/doors/prison_door_anim.tscn" id="6_26cc2"]
+[ext_resource type="PackedScene" uid="uid://d0luuwv7q1par" path="res://prefabs/torch.tscn" id="8_h5bdi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xy5go"]
+albedo_color = Color(0.145098, 0.145098, 0.145098, 1)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfau8"]
+albedo_color = Color(0.443137, 0, 0.027451, 1)
+uv1_triplanar = true
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_nc88y")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="player" parent="." instance=ExtResource("1_csxcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="map" type="Node3D" parent="."]
+
+[node name="torch0" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.3, -3)
+
+[node name="torch" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, -7, 1.3, -1.5)
+
+[node name="torch2" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(3.57746e-09, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.57746e-09, 7, 1.3, -1.5)
+
+[node name="torch3" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3, 1.3, -8)
+
+[node name="torch4" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3, 1.3, -8)
+
+[node name="torch5" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(3.57746e-09, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.57746e-09, 6, 1.3, -11)
+
+[node name="torch6" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(3.57746e-09, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.57746e-09, 10, 1.3, -17.5)
+
+[node name="torch7" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 1.3, -17.5)
+
+[node name="torch8" parent="map" instance=ExtResource("8_h5bdi")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 5, 1.3, -22)
+
+[node name="floor" type="CSGBox3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 7.5)
+material_override = SubResource("StandardMaterial3D_xy5go")
+use_collision = true
+size = Vector3(30, 1, 15)
+
+[node name="box" type="CSGBox3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 2)
+material_override = SubResource("StandardMaterial3D_vfau8")
+use_collision = true
+
+[node name="box2" type="CSGBox3D" parent="map"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 3, 1, 5)
+material_override = SubResource("StandardMaterial3D_vfau8")
+use_collision = true
+
+[node name="box3" type="CSGBox3D" parent="map"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 7, 1.5, 5)
+material_override = SubResource("StandardMaterial3D_vfau8")
+use_collision = true
+
+[node name="box4" type="CSGBox3D" parent="map"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 7, 2, 10)
+material_override = SubResource("StandardMaterial3D_vfau8")
+use_collision = true
+
+[node name="tileset" type="Node3D" parent="map"]
+
+[node name="prison" type="GridMap" parent="map/tileset"]
+mesh_library = ExtResource("4_bwyyl")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65529, 65533, 0, 65529, 65534, 0, 65529, 65535, 0, 65529, 65531, 0, 65529, 65530, 0, 65529, 65529, 0, 65530, 65528, 1441792, 65531, 65528, 1441792, 65532, 65528, 1441792, 65534, 65528, 1441792, 65533, 65528, 1441792, 1, 65528, 1441792, 2, 65528, 1441792, 3, 65528, 1441792, 6, 65529, 655360, 6, 65530, 655360, 6, 65531, 655360, 6, 65533, 655360, 6, 65534, 655360, 6, 65535, 655360, 5, 65532, 655362, 4, 65532, 655362, 3, 65532, 655362, 2, 65532, 655362, 65533, 65532, 655362, 65532, 65532, 655362, 65531, 65532, 655362, 65530, 65532, 655362, 65535, 65532, 655363, 6, 65532, 655363, 0, 65532, 3, 65529, 65532, 3, 1, 65532, 8, 65534, 65532, 8, 65530, 65533, 1, 65531, 65533, 1, 65532, 65533, 1, 65533, 65533, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 65533, 1, 3, 65533, 1, 5, 65533, 1, 5, 65534, 1, 4, 65533, 1, 4, 65534, 1, 5, 65535, 1, 4, 65535, 1, 3, 65535, 1, 3, 65534, 1, 2, 65534, 1, 1, 65534, 1, 0, 65534, 1, 65535, 65534, 1, 65534, 65534, 1, 65533, 65534, 1, 65532, 65534, 1, 65531, 65534, 1, 65530, 65534, 1, 65530, 65535, 1, 65531, 65535, 1, 65532, 65535, 1, 65533, 65535, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 2, 65535, 1, 0, 65531, 0, 0, 65530, 0, 0, 65529, 0, 65535, 65531, 655360, 65535, 65530, 655360, 65535, 65529, 655360, 0, 65528, 4, 65529, 65528, 4, 65535, 65528, 1441796, 6, 65528, 1441796, 5, 65531, 655361, 4, 65531, 655361, 5, 65530, 655361, 5, 65529, 655361, 5, 65528, 655361, 4, 65528, 655361, 4, 65529, 655361, 4, 65530, 655361, 3, 65531, 655361, 3, 65530, 655361, 3, 65529, 655361, 2, 65529, 655361, 2, 65530, 655361, 2, 65531, 655361, 1, 65531, 655361, 1, 65530, 655361, 1, 65529, 655361, 65534, 65531, 655361, 65534, 65530, 655361, 65534, 65529, 655361, 65533, 65529, 655361, 65533, 65530, 655361, 65533, 65531, 655361, 65532, 65531, 655361, 65532, 65530, 655361, 65532, 65529, 655361, 65531, 65529, 655361, 65531, 65530, 655361, 65531, 65531, 655361, 65530, 65531, 655361, 65530, 65530, 655361, 65530, 65529, 655361, 5, 65527, 655360, 5, 65526, 655360, 4, 65527, 0, 4, 65526, 0, 5, 65525, 655366, 4, 65525, 7, 4, 65524, 5, 4, 65523, 5, 5, 65524, 655365, 5, 65523, 655365, 5, 65522, 655369, 4, 65522, 1048585, 6, 65522, 655370, 7, 65521, 655370, 8, 65520, 655370, 9, 65519, 655370, 9, 65517, 1441802, 8, 65516, 1441802, 7, 65515, 1441802, 6, 65514, 1441802, 3, 65514, 10, 2, 65515, 10, 1, 65516, 10, 0, 65517, 10, 0, 65519, 1048586, 1, 65520, 1048586, 2, 65521, 1048586, 3, 65522, 1048586, 3, 65521, 1048585, 2, 65520, 1048585, 1, 65519, 1048585, 1, 65517, 9, 2, 65516, 9, 3, 65515, 9, 6, 65515, 1441801, 7, 65516, 1441801, 8, 65517, 1441801, 8, 65519, 655369, 7, 65520, 655369, 6, 65521, 655369, 9, 65518, 655365, 0, 65518, 5, 4, 65514, 1441797, 5, 65514, 1441797, 4, 65515, 1441793, 5, 65515, 1441793, 5, 65520, 1441793, 5, 65521, 1441793, 4, 65521, 1441793, 4, 65520, 1441793, 6, 65516, 1441793, 6, 65520, 1441793, 8, 65518, 1441793, 3, 65516, 1441793, 3, 65520, 1441793, 1, 65518, 1441793, 4, 65516, 1441793, 5, 65516, 1441793, 5, 65519, 1441801, 2, 65519, 1441801, 2, 65517, 655369, 5, 65517, 655369, 4, 65517, 1048585, 4, 65519, 9, 7, 65519, 9, 7, 65518, 5, 4, 65518, 5, 6, 65519, 1441797, 3, 65519, 1441797, 5, 65518, 655365, 3, 65517, 1048581, 6, 65517, 1048581, 2, 65518, 655365, 7, 65517, 1048585)
+}
+
+[node name="prison_door" parent="map" instance=ExtResource("6_26cc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -3.5)
+
+[node name="prison_door2" parent="map" instance=ExtResource("6_26cc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3.5)
+
+[node name="HUD" parent="." instance=ExtResource("4_ehx4a")]

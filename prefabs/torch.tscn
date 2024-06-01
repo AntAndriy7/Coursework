@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0luuwv7q1par"]
+
+[ext_resource type="PackedScene" uid="uid://cda0jyb54wy7w" path="res://models/torch/torch.glb" id="1_vi6sr"]
+[ext_resource type="Texture2D" uid="uid://dvo8y4oo8gy46" path="res://models/torch/fire.png" id="2_m70pg"]
+
+[sub_resource type="Gradient" id="Gradient_uv7yb"]
+colors = PackedColorArray(0.984314, 0.937255, 0.643137, 1, 1, 0.529412, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hgbp"]
+gradient = SubResource("Gradient_uv7yb")
+
+[sub_resource type="Curve" id="Curve_iubxc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lrgio"]
+curve = SubResource("Curve_iubxc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_takb3"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 0.8
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.5
+linear_accel_max = 1.0
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_lrgio")
+color_ramp = SubResource("GradientTexture1D_2hgbp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t041n"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_m70pg")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_xdotj"]
+material = SubResource("StandardMaterial3D_t041n")
+
+[node name="torch" instance=ExtResource("1_vi6sr")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Fire" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.62)
+
+[node name="Flame" type="GPUParticles3D" parent="Fire" index="0"]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_takb3")
+draw_pass_1 = SubResource("QuadMesh_xdotj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Fire" index="1"]
+transform = Transform3D(3.33333, 0, 0, 0, 3.33333, 0, 0, 0, 3.33333, 0, 0, 0.15)
+light_energy = 0.75
